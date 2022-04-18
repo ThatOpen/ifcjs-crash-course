@@ -18,8 +18,6 @@ loadIfc('../../../IFC/01.ifc');
 const controls = viewer.context.ifcCamera.cameraControls;
 controls.setPosition(7.6, 4.3, 24.8, false);
 controls.setTarget(-7.1, -0.3, 2.5, false);
-controls.mouseButtons.wheel = undefined;
 
 window.ondblclick = () => viewer.IFC.selector.pickIfcItem(true);
 window.onmousemove = () => viewer.IFC.selector.prePickIfcItem();
-window.onMouseWheel = undefined;
