@@ -1,0 +1,16 @@
+import { Camera } from 'three';
+import { IfcComponent, NavigationMode, NavigationModes } from '../../../../base-types';
+import { LiteEvent } from '../../../../utils/LiteEvent';
+import { IfcCamera } from '../camera';
+import { IfcContext } from '../../context';
+export declare class PlanControl extends IfcComponent implements NavigationMode {
+    private ifcCamera;
+    readonly mode = NavigationModes.Plan;
+    enabled: boolean;
+    onChange: LiteEvent<any>;
+    onChangeProjection: LiteEvent<Camera>;
+    private readonly defaultAzimuthSpeed;
+    private readonly defaultPolarSpeed;
+    constructor(context: IfcContext, ifcCamera: IfcCamera);
+    toggle(active: boolean): void;
+}

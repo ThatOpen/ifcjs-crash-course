@@ -1,0 +1,37 @@
+import { WebIfcAPI } from '../../BaseDefinitions';
+import { WorkerAPIs } from '../BaseDefinitions';
+import { FlatMesh, IfcGeometry, LoaderError, LoaderSettings, RawLineData, Vector } from 'web-ifc';
+import { IFCWorkerHandler } from '../IFCWorkerHandler';
+import { Serializer } from '../serializer/Serializer';
+export declare class WebIfcHandler implements WebIfcAPI {
+    private handler;
+    private serializer;
+    wasmModule: any;
+    API: WorkerAPIs;
+    constructor(handler: IFCWorkerHandler, serializer: Serializer);
+    Init(): Promise<void>;
+    OpenModel(data: string | Uint8Array, settings?: LoaderSettings): Promise<number>;
+    CreateModel(settings?: LoaderSettings): Promise<number>;
+    ExportFileAsIFC(modelID: number): Promise<Uint8Array>;
+    GetGeometry(modelID: number, geometryExpressID: number): Promise<IfcGeometry>;
+    GetLine(modelID: number, expressID: number, flatten?: boolean): Promise<any>;
+    GetAndClearErrors(modelID: number): Promise<Vector<LoaderError>>;
+    WriteLine(modelID: number, lineObject: any): Promise<void>;
+    FlattenLine(modelID: number, line: any): Promise<void>;
+    GetRawLineData(modelID: number, expressID: number): Promise<RawLineData>;
+    WriteRawLineData(modelID: number, data: RawLineData): Promise<any>;
+    GetLineIDsWithType(modelID: number, type: number): Promise<Vector<number>>;
+    GetAllLines(modelID: number): Promise<Vector<number>>;
+    SetGeometryTransformation(modelID: number, transformationMatrix: number[]): Promise<void>;
+    GetCoordinationMatrix(modelID: number): Promise<number[]>;
+    GetVertexArray(ptr: number, size: number): Promise<Float32Array>;
+    GetIndexArray(ptr: number, size: number): Promise<Uint32Array>;
+    getSubArray(heap: any, startPtr: any, sizeBytes: any): Promise<any>;
+    CloseModel(modelID: number): Promise<void>;
+    StreamAllMeshes(modelID: number, meshCallback: (mesh: FlatMesh) => void): Promise<void>;
+    StreamAllMeshesWithTypes(modelID: number, types: number[], meshCallback: (mesh: FlatMesh) => void): Promise<void>;
+    IsModelOpen(modelID: number): Promise<boolean>;
+    LoadAllGeometry(modelID: number): Promise<Vector<FlatMesh>>;
+    GetFlatMesh(modelID: number, expressID: number): Promise<FlatMesh>;
+    SetWasmPath(path: string): Promise<void>;
+}

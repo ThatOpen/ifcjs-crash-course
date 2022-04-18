@@ -1,0 +1,29 @@
+{
+  "name": "ifcjs-crash-course",
+  "version": "1.0.0",
+  "description": "Exercises of the IFC.js crash course.",
+  "main": "index.js",
+  "scripts": {
+    "build": "node example-builder.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ifcjs/ifcjs-crash-course.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ifcjs/ifcjs-crash-course/issues"
+  },
+  "homepage": "https://github.com/ifcjs/ifcjs-crash-course#readme",
+  "dependencies": {
+    "three": "^0.135.0",
+    "web-ifc-viewer": "^1.0.172"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.1.0",
+    "@rollup/plugin-node-resolve": "^13.2.1",
+    "rollup": "^2.70.2"
+  }
+}
