@@ -44151,6 +44151,207 @@ if ( typeof window !== 'undefined' ) {
 
 }
 
+class CSS2DObject extends Object3D {
+
+	constructor( element = document.createElement( 'div' ) ) {
+
+		super();
+
+		this.element = element;
+
+		this.element.style.position = 'absolute';
+		this.element.style.userSelect = 'none';
+
+		this.element.setAttribute( 'draggable', false );
+
+		this.addEventListener( 'removed', function () {
+
+			this.traverse( function ( object ) {
+
+				if ( object.element instanceof Element && object.element.parentNode !== null ) {
+
+					object.element.parentNode.removeChild( object.element );
+
+				}
+
+			} );
+
+		} );
+
+	}
+
+	copy( source, recursive ) {
+
+		super.copy( source, recursive );
+
+		this.element = source.element.cloneNode( true );
+
+		return this;
+
+	}
+
+}
+
+CSS2DObject.prototype.isCSS2DObject = true;
+
+//
+
+const _vector$1 = new Vector3();
+const _viewMatrix = new Matrix4();
+const _viewProjectionMatrix = new Matrix4();
+const _a = new Vector3();
+const _b = new Vector3();
+
+class CSS2DRenderer {
+
+	constructor( parameters = {} ) {
+
+		const _this = this;
+
+		let _width, _height;
+		let _widthHalf, _heightHalf;
+
+		const cache = {
+			objects: new WeakMap()
+		};
+
+		const domElement = parameters.element !== undefined ? parameters.element : document.createElement( 'div' );
+
+		domElement.style.overflow = 'hidden';
+
+		this.domElement = domElement;
+
+		this.getSize = function () {
+
+			return {
+				width: _width,
+				height: _height
+			};
+
+		};
+
+		this.render = function ( scene, camera ) {
+
+			if ( scene.autoUpdate === true ) scene.updateMatrixWorld();
+			if ( camera.parent === null ) camera.updateMatrixWorld();
+
+			_viewMatrix.copy( camera.matrixWorldInverse );
+			_viewProjectionMatrix.multiplyMatrices( camera.projectionMatrix, _viewMatrix );
+
+			renderObject( scene, scene, camera );
+			zOrder( scene );
+
+		};
+
+		this.setSize = function ( width, height ) {
+
+			_width = width;
+			_height = height;
+
+			_widthHalf = _width / 2;
+			_heightHalf = _height / 2;
+
+			domElement.style.width = width + 'px';
+			domElement.style.height = height + 'px';
+
+		};
+
+		function renderObject( object, scene, camera ) {
+
+			if ( object.isCSS2DObject ) {
+
+				object.onBeforeRender( _this, scene, camera );
+
+				_vector$1.setFromMatrixPosition( object.matrixWorld );
+				_vector$1.applyMatrix4( _viewProjectionMatrix );
+
+				const element = object.element;
+
+				if ( /apple/i.test( navigator.vendor ) ) {
+
+					// https://github.com/mrdoob/three.js/issues/21415
+					element.style.transform = 'translate(-50%,-50%) translate(' + Math.round( _vector$1.x * _widthHalf + _widthHalf ) + 'px,' + Math.round( - _vector$1.y * _heightHalf + _heightHalf ) + 'px)';
+
+				} else {
+
+					element.style.transform = 'translate(-50%,-50%) translate(' + ( _vector$1.x * _widthHalf + _widthHalf ) + 'px,' + ( - _vector$1.y * _heightHalf + _heightHalf ) + 'px)';
+
+				}
+
+				element.style.display = ( object.visible && _vector$1.z >= - 1 && _vector$1.z <= 1 ) ? '' : 'none';
+
+				const objectData = {
+					distanceToCameraSquared: getDistanceToSquared( camera, object )
+				};
+
+				cache.objects.set( object, objectData );
+
+				if ( element.parentNode !== domElement ) {
+
+					domElement.appendChild( element );
+
+				}
+
+				object.onAfterRender( _this, scene, camera );
+
+			}
+
+			for ( let i = 0, l = object.children.length; i < l; i ++ ) {
+
+				renderObject( object.children[ i ], scene, camera );
+
+			}
+
+		}
+
+		function getDistanceToSquared( object1, object2 ) {
+
+			_a.setFromMatrixPosition( object1.matrixWorld );
+			_b.setFromMatrixPosition( object2.matrixWorld );
+
+			return _a.distanceToSquared( _b );
+
+		}
+
+		function filterAndFlatten( scene ) {
+
+			const result = [];
+
+			scene.traverse( function ( object ) {
+
+				if ( object.isCSS2DObject ) result.push( object );
+
+			} );
+
+			return result;
+
+		}
+
+		function zOrder( scene ) {
+
+			const sorted = filterAndFlatten( scene ).sort( function ( a, b ) {
+
+				const distanceA = cache.objects.get( a ).distanceToCameraSquared;
+				const distanceB = cache.objects.get( b ).distanceToCameraSquared;
+
+				return distanceA - distanceB;
+
+			} );
+
+			const zMax = sorted.length;
+
+			for ( let i = 0, l = sorted.length; i < l; i ++ ) {
+
+				sorted[ i ].element.style.zIndex = zMax - i;
+
+			}
+
+		}
+
+	}
+
+}
+
 var NavigationModes;
 (function (NavigationModes) {
     NavigationModes[NavigationModes["Orbit"] = 0] = "Orbit";
@@ -45686,7 +45887,7 @@ class TransformControlsPlane extends Mesh {
 TransformControlsPlane.prototype.isTransformControlsPlane = true;
 
 const _box$1 = new Box3();
-const _vector$1 = new Vector3();
+const _vector = new Vector3();
 
 class LineSegmentsGeometry extends InstancedBufferGeometry {
 
@@ -45885,11 +46086,11 @@ class LineSegmentsGeometry extends InstancedBufferGeometry {
 
 			for ( let i = 0, il = start.count; i < il; i ++ ) {
 
-				_vector$1.fromBufferAttribute( start, i );
-				maxRadiusSq = Math.max( maxRadiusSq, center.distanceToSquared( _vector$1 ) );
+				_vector.fromBufferAttribute( start, i );
+				maxRadiusSq = Math.max( maxRadiusSq, center.distanceToSquared( _vector ) );
 
-				_vector$1.fromBufferAttribute( end, i );
-				maxRadiusSq = Math.max( maxRadiusSq, center.distanceToSquared( _vector$1 ) );
+				_vector.fromBufferAttribute( end, i );
+				maxRadiusSq = Math.max( maxRadiusSq, center.distanceToSquared( _vector ) );
 
 			}
 
@@ -90772,207 +90973,6 @@ class IfcAxes extends IfcComponent {
     }
 }
 
-class CSS2DObject extends Object3D {
-
-	constructor( element = document.createElement( 'div' ) ) {
-
-		super();
-
-		this.element = element;
-
-		this.element.style.position = 'absolute';
-		this.element.style.userSelect = 'none';
-
-		this.element.setAttribute( 'draggable', false );
-
-		this.addEventListener( 'removed', function () {
-
-			this.traverse( function ( object ) {
-
-				if ( object.element instanceof Element && object.element.parentNode !== null ) {
-
-					object.element.parentNode.removeChild( object.element );
-
-				}
-
-			} );
-
-		} );
-
-	}
-
-	copy( source, recursive ) {
-
-		super.copy( source, recursive );
-
-		this.element = source.element.cloneNode( true );
-
-		return this;
-
-	}
-
-}
-
-CSS2DObject.prototype.isCSS2DObject = true;
-
-//
-
-const _vector = new Vector3();
-const _viewMatrix = new Matrix4();
-const _viewProjectionMatrix = new Matrix4();
-const _a = new Vector3();
-const _b = new Vector3();
-
-class CSS2DRenderer {
-
-	constructor( parameters = {} ) {
-
-		const _this = this;
-
-		let _width, _height;
-		let _widthHalf, _heightHalf;
-
-		const cache = {
-			objects: new WeakMap()
-		};
-
-		const domElement = parameters.element !== undefined ? parameters.element : document.createElement( 'div' );
-
-		domElement.style.overflow = 'hidden';
-
-		this.domElement = domElement;
-
-		this.getSize = function () {
-
-			return {
-				width: _width,
-				height: _height
-			};
-
-		};
-
-		this.render = function ( scene, camera ) {
-
-			if ( scene.autoUpdate === true ) scene.updateMatrixWorld();
-			if ( camera.parent === null ) camera.updateMatrixWorld();
-
-			_viewMatrix.copy( camera.matrixWorldInverse );
-			_viewProjectionMatrix.multiplyMatrices( camera.projectionMatrix, _viewMatrix );
-
-			renderObject( scene, scene, camera );
-			zOrder( scene );
-
-		};
-
-		this.setSize = function ( width, height ) {
-
-			_width = width;
-			_height = height;
-
-			_widthHalf = _width / 2;
-			_heightHalf = _height / 2;
-
-			domElement.style.width = width + 'px';
-			domElement.style.height = height + 'px';
-
-		};
-
-		function renderObject( object, scene, camera ) {
-
-			if ( object.isCSS2DObject ) {
-
-				object.onBeforeRender( _this, scene, camera );
-
-				_vector.setFromMatrixPosition( object.matrixWorld );
-				_vector.applyMatrix4( _viewProjectionMatrix );
-
-				const element = object.element;
-
-				if ( /apple/i.test( navigator.vendor ) ) {
-
-					// https://github.com/mrdoob/three.js/issues/21415
-					element.style.transform = 'translate(-50%,-50%) translate(' + Math.round( _vector.x * _widthHalf + _widthHalf ) + 'px,' + Math.round( - _vector.y * _heightHalf + _heightHalf ) + 'px)';
-
-				} else {
-
-					element.style.transform = 'translate(-50%,-50%) translate(' + ( _vector.x * _widthHalf + _widthHalf ) + 'px,' + ( - _vector.y * _heightHalf + _heightHalf ) + 'px)';
-
-				}
-
-				element.style.display = ( object.visible && _vector.z >= - 1 && _vector.z <= 1 ) ? '' : 'none';
-
-				const objectData = {
-					distanceToCameraSquared: getDistanceToSquared( camera, object )
-				};
-
-				cache.objects.set( object, objectData );
-
-				if ( element.parentNode !== domElement ) {
-
-					domElement.appendChild( element );
-
-				}
-
-				object.onAfterRender( _this, scene, camera );
-
-			}
-
-			for ( let i = 0, l = object.children.length; i < l; i ++ ) {
-
-				renderObject( object.children[ i ], scene, camera );
-
-			}
-
-		}
-
-		function getDistanceToSquared( object1, object2 ) {
-
-			_a.setFromMatrixPosition( object1.matrixWorld );
-			_b.setFromMatrixPosition( object2.matrixWorld );
-
-			return _a.distanceToSquared( _b );
-
-		}
-
-		function filterAndFlatten( scene ) {
-
-			const result = [];
-
-			scene.traverse( function ( object ) {
-
-				if ( object.isCSS2DObject ) result.push( object );
-
-			} );
-
-			return result;
-
-		}
-
-		function zOrder( scene ) {
-
-			const sorted = filterAndFlatten( scene ).sort( function ( a, b ) {
-
-				const distanceA = cache.objects.get( a ).distanceToCameraSquared;
-				const distanceB = cache.objects.get( b ).distanceToCameraSquared;
-
-				return distanceA - distanceB;
-
-			} );
-
-			const zMax = sorted.length;
-
-			for ( let i = 0, l = sorted.length; i < l; i ++ ) {
-
-				sorted[ i ].element.style.zIndex = zMax - i;
-
-			}
-
-		}
-
-	}
-
-}
-
 class IfcDimensionLine {
     constructor(context, start, end, lineMaterial, endpointMaterial, endpointGeometry, className, endpointScale) {
         // Elements
@@ -115551,10 +115551,35 @@ viewer.axes.setAxes();
 async function loadIfc(url) {
     await viewer.IFC.setWasmPath("../../../");
     const model = await viewer.IFC.loadIfcUrl(url);
-    viewer.shadowDropper.renderShadow(model.modelID);
+    await viewer.shadowDropper.renderShadow(model.modelID);
+
+    const doorProps = await viewer.IFC.getProperties(model.modelID, 22492, false, false);
+    formatProperties(doorProps);
+    createLabel(model, new Vector3(-0.5, 1, 0), doorProps);
+
+    const windowProps = await viewer.IFC.getProperties(model.modelID, 6691, false, false);
+    formatProperties(windowProps);
+    createLabel(model, new Vector3(2, 1.5, 10.3), windowProps);
+
+    const panelProps = await viewer.IFC.getProperties(model.modelID, 22820, false, false);
+    formatProperties(panelProps);
+    createLabel(model, new Vector3(-3, 1.5, 17), panelProps);
+
+    const chairProps = await viewer.IFC.getProperties(model.modelID, 19239, false, false);
+    formatProperties(chairProps);
+    createLabel(model, new Vector3(-2.8, 0.7, 8.3), chairProps);
+
 }
 
-loadIfc('../../../IFC/01.ifc');
+function formatProperties(properties) {
+   for(let name in properties) {
+       const value = properties[name];
+       if(value === null || value === undefined) properties[name] = "Undefined";
+       else if(value.value) properties[name] = value.value;
+       else if(typeof value === 'number') properties[name] = value.toString();
+   }
+}
+
 
 // Setup camera controls
 const controls = viewer.context.ifcCamera.cameraControls;
@@ -115563,3 +115588,61 @@ controls.setTarget(-7.1, -0.3, 2.5, false);
 
 window.ondblclick = () => viewer.IFC.selector.pickIfcItem(true);
 window.onmousemove = () => viewer.IFC.selector.prePickIfcItem();
+
+loadIfc('../../../IFC/01.ifc');
+
+function createLabel(model, position, properties) {
+    const dialog = setupDialog(model, position, properties);
+    setupPreview(model, position, dialog);
+}
+
+function setupPreview(model, position, htmlDialog) {
+    const htmlPreview = document.createElement( 'div' );
+    htmlPreview.className = 'props-preview';
+    htmlPreview.onmouseenter = () => {
+        htmlDialog.classList.remove('collapsed');
+    };
+
+    const previewLogo = document.createElement('img');
+    previewLogo.src = '../../../static/logo.png';
+    previewLogo.className = 'preview-logo';
+    htmlPreview.appendChild(previewLogo);
+
+    const propsPreview = new CSS2DObject( htmlPreview );
+    propsPreview.position.copy(position);
+
+    model.add(propsPreview);
+}
+
+function setupDialog(model, position, properties) {
+    const htmlDialog = document.createElement( 'div' );
+    htmlDialog.className = 'props-dialog collapsed';
+    const propsDialog = new CSS2DObject( htmlDialog );
+    htmlDialog.onmouseleave = () => htmlDialog.classList.add('collapsed');
+    propsDialog.position.copy(position);
+    model.add(propsDialog);
+    // const properties = {aaaaaaa: "2341", bbbbb: "dkjfaldfjkal", ccccc: "kdfj akdf ja"}
+    generatePropertiesHTML(properties, htmlDialog);
+    return htmlDialog;
+}
+
+function generatePropertiesHTML(properties, htmlDialog) {
+    htmlDialog.children.length = 0;
+    let counter = 0;
+    const propertyNames = Object.keys(properties);
+    propertyNames.forEach(propertyName => {
+        const div = document.createElement('div');
+        const propertyValue = properties[propertyName];
+        div.textContent = `${propertyName}: ${propertyValue}`;
+        div.classList.add('props-entry');
+        htmlDialog.appendChild(div);
+
+        const isLastElement = counter === propertyNames.length - 1;
+        if(!isLastElement) {
+            const divider = document.createElement('div');
+            divider.classList.add('props-divider');
+            htmlDialog.appendChild(divider);
+            counter++;
+        }
+    });
+}

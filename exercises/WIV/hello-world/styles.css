@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 html, body {
@@ -15,4 +16,73 @@ html, body {
     outline: none;
     width: 100%;
     height: 100%;
+}
+
+.props-divider {
+    height: 1px;
+    background-color: #aaaaaa;
+}
+
+.preview-logo {
+    width: 2rem;
+    animation: logo-spin 8s infinite 0s cubic-bezier(0.38, 0.01, 0, 0.99);
+}
+
+@keyframes logo-spin {
+    0% {
+        transform: rotate(0);
+    }
+    25% {
+        transform: rotate(90deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    75% {
+        transform: rotate(270deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.props-entry {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.props-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    box-shadow: 0 1px 12px 0 #555555;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100%;
+    pointer-events: all !important;
+}
+
+.props-dialog {
+    overflow-y: auto;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 12px 0 #555555;
+    pointer-events: all !important;
+    transition: box-shadow 0.1s, width 0.1s ease-out, height 0.1s ease-out, font-size 0.15s;
+    width: 20rem;
+    height: 20rem;
+
+}
+
+.collapsed {
+    visibility: collapse;
+    width: 0;
+    height: 0;
+    font-size: 0;
+}
+
+.props-dialog:hover {
+    box-shadow: 0 1px 26px 3px #777777;
 }
