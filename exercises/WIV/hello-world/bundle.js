@@ -115564,4 +115564,4 @@ controls.mouseButtons.wheel = undefined;
 
 window.ondblclick = () => viewer.IFC.selector.pickIfcItem(true);
 window.onmousemove = () => viewer.IFC.selector.prePickIfcItem();
-window.onmousewheel = undefined;
+window.onMouseWheel = undefined;
