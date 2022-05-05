@@ -1,0 +1,16 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;    
+}
+
+.sub-header{
+    color: red;
+}
+
+#id-item{
+    color: blue
+}
+
+.text{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: orange;
+}
