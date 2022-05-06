@@ -1,0 +1,24 @@
+button {
+    margin: 6px;
+}
+
+.button-container {
+    display: inline-flex;
+    width: fit-content;
+    background-color: #eee;
+}
+
+.main-button {
+    background-color: #ddd;
+    border: solid 1px #aaa;
+}
+
+.secondary-button {
+    color: #555;
+    background-color: #ddd;
+    border: solid 1px #aaa;
+}
+
+.vertical {
+    flex-direction: column;
+}
