@@ -1,0 +1,11 @@
+body > div {
+    display: flex;
+    width: 100vw;
+    height: 20rem;
+}
+
+header, nav, section, aside, footer {
+    padding: 2rem;
+    text-align: center;
+    width: 100%;
+}
