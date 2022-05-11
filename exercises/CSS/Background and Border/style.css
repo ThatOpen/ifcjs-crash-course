@@ -14,14 +14,7 @@ h1{
 }
 
 #box-3{
-    background-image: url('./logo.svg');
-    background-repeat: no-repeat;
-    background-position: center top;
-    background-size: cover;
-    background: url('./logo.svg') no-repeat center;
     border: 1px solid;
-    text-align: center;
-    vertical-align: middle;
     border-color: black;
     color: rgb(7, 7, 7);
 }
