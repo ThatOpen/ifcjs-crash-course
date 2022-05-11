@@ -1,0 +1,27 @@
+body{
+    background-color: #7DBBC3;
+    font-family: 'Roboto', sans-serif;
+}
+h1{
+    background-color: #080F0F;
+    border-width: 3px;
+    width: 25%;
+    border-style: solid;
+    border-color: #FFD400;
+    text-align: center;
+    color: #FFD400;
+    border-radius: 5px;
+}
+
+#box-3{
+    background-image: url('./logo.svg');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    background: url('./logo.svg') no-repeat center;
+    border: 1px solid;
+    text-align: center;
+    vertical-align: middle;
+    border-color: black;
+    color: rgb(7, 7, 7);
+}
