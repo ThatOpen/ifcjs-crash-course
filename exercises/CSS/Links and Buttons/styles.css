@@ -1,0 +1,68 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow: hidden;
+    background-color: #F3F4F6;
+}
+
+.general-container {
+    background-color: white;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    margin: 2rem;
+    display: flex;
+}
+
+.container {
+    padding: 1rem;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    width:50px;
+    word-wrap: break-word;
+    overflow-y: scroll;
+}
+
+.separator {
+    border: 2px solid #F3F4F6;
+}
+
+.file-opener {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    top: 3rem;
+    right: 4rem;
+}
+
+.basic-button {
+    background-color: #F3F4F6;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: none;
+    transition: all 0.1s ease-in-out;
+    box-shadow: 0 0 0 0 #e6e6e6;
+    margin: 1rem;
+}
+
+.basic-button:hover {
+    background-color: white;
+    box-shadow: 0 10px 20px 8px #e6e6e6;
+}
+
+.basic-button:active {
+    background-color: #F3F4F6;
+}
+
+.invisible {
+    visibility: collapse;
+}
