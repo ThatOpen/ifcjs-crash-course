@@ -1,6 +1,5 @@
 *, *::before, *::after{
-    margin: 0;
-    padding: 0;
+
     box-sizing: border-box;
 }
 
@@ -17,12 +16,14 @@ h1{
     text-align: center;
     color: #FFD400;
     border-radius: 5px;
+    margin-left: 5%;
+    padding: 1% 1%;
 
-    margin: 1%;
-    padding: 1% 0%;
+
 }
+
 h2{
-    padding: 1%;
+   padding: 1%;
 }
 
 #box-3{
