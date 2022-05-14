@@ -1,0 +1,30 @@
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+body{
+    background-color: #c7d4d6;
+    font-family: 'Roboto', sans-serif;
+}
+h1{
+    background-color: #080F0F;
+    border-width: 3px;
+    width: 20%;
+    border-style: solid;
+    border-color: #FFD400;
+    text-align: center;
+    color: #FFD400;
+    border-radius: 5px;
+    margin: 2px auto;
+}
+h2{
+   margin: 10px auto;
+   text-align: center;
+}
+#box-3{
+    border: 1px solid;
+    border-color: black;
+    color: black;
+}
+
+
+
