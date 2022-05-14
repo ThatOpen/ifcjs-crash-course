@@ -44,25 +44,20 @@ html, body {
     right: 4rem;
 }
 
-.basic-button {
+.invisible {
+    visibility: collapse;
+}
+
+.basic-button{
     background-color: #F3F4F6;
     padding: 1rem;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     border: none;
-    transition: all 0.1s ease-in-out;
     box-shadow: 0 0 0 0 #e6e6e6;
     margin: 1rem;
 }
 
-.basic-button:hover {
-    background-color: white;
-    box-shadow: 0 10px 20px 8px #e6e6e6;
-}
-
-.basic-button:active {
-    background-color: #F3F4F6;
-}
-
-.invisible {
-    visibility: collapse;
+.basic-button:hover{
+    background-color: black;
+    color: white;
 }
