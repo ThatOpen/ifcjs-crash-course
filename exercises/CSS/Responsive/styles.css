@@ -67,13 +67,11 @@ html, body {
 
 @media (max-width : 500px){
     .general-container{
-        display: block;
-        min-width: 450px;
-        
+        flex-flow: column;
     }
     .container{
-        width: 100vw;
+        width: 90vw;
     }
-}
 
+}
 
