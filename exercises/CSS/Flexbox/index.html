@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" type="image/png" href="./favicon.ico" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="./styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IFC.js</title>
+  </head>
+  <body>
+    <input type="file" id="file-input">
+    <div class="app-container">
+      <div class="sidebar">
+        <div class="buttons">
+          <div id="open-button" class="button">Open</div>
+        </div>
+        <div class="ifc-tree-menu">
+          <ul id="myUL">
+            <li id="tree-root">
+              <span class="caret">Beverages</span>
+              <ul class="nested">
+                <li>Water</li>
+                <li>Coffee</li>
+                <li>
+                  <span class="caret">Tea</span>
+                  <ul class="nested">
+                    <li>Black Tea</li>
+                    <li>White Tea</li>
+                    <li><span class="caret">Green Tea</span>
+                      <ul class="nested">
+                        <li>Sencha</li>
+                        <li>Gyokuro</li>
+                        <li>Matcha</li>
+                        <li>Pi Lo Chun</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="ifc-property-menu">
+          <div class="ifc-property-item">
+            <div>Key</div>
+            <div class="ifc-property-value">Value</div>
+          </div>
+          <div id="ifc-property-menu-root"></div>
+        </div>
+      </div>
+      <div id="viewer-container"></div>
+    </div>
+    <script src="./bundle.js"></script>
+  </body>
+</html>
