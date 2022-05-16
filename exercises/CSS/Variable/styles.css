@@ -1,0 +1,156 @@
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    --greycolor : #888888;
+    --purple : rebeccapurple;
+    
+}
+
+html, body {
+    overflow: hidden;
+}
+
+input {
+    visibility: collapse;
+}
+
+.app-container {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    background-color: blue;
+}
+
+.sidebar {
+    height: 100%;
+    min-width: 30rem;
+    z-index: 1;
+    background-color: white;
+    border: solid 1px var(--greycolor);
+}
+
+.buttons {
+    height: 5%;
+    display: flex;
+    flex-direction: row;
+}
+
+.button {
+    margin: 0.5rem;
+    border: solid 1px var(--greycolor);
+    align-items: center;
+    padding: 0 1rem;
+    display: flex;
+    border-radius: 0.5rem;
+    user-select: none;
+    cursor: pointer;
+}
+
+.ifc-property-menu {
+    border-top: solid 1px var(--greycolor);
+    width: 100%;
+    height: 45%;
+}
+
+.ifc-property-item {
+    width: 100%;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    border-bottom: solid 1px var(--greycolor);
+}
+
+.ifc-property-value {
+    width: 100%;
+    text-align: right;
+}
+
+.ifc-tree-menu {
+    border-top: solid 1px var(--greycolor);
+    width: 100%;
+    height: 50%;
+    overflow-y: auto;
+}
+
+.ifcjs-dimension-preview {
+    width: 2rem;
+    height: 2rem;
+    background-color: rebeccapurple;
+    border-radius: 1rem;
+    opacity: 0.3;
+}
+
+.ifcjs-dimension-preview {
+    width: 2rem;
+    height: 2rem;
+    background-color: rebeccapurple;
+    border-radius: 1rem;
+    opacity: 0.3;
+}
+
+
+#viewer-container {
+    height: 100%;
+    width: 100%;
+}
+
+/*Property menu*/
+
+#ifc-property-menu-root {
+    overflow: auto;
+    height: calc(100% - 2rem);
+}
+
+/*Tree view: https://www.w3schools.com/howto/howto_js_treeview.asp*/
+
+li ul {
+    user-select: none;
+    cursor: pointer;
+}
+
+/* Remove default bullets */
+ul, #myUL {
+    list-style-type: none;
+}
+
+/* Remove margins and padding from the parent ul */
+#myUL {
+    margin: 0.5rem;
+    padding: 0;
+}
+
+/* Style the caret/arrow */
+.caret {
+    cursor: pointer;
+    user-select: none; /* Prevent text selection */
+}
+
+/* Create the caret/arrow with a unicode, and style it */
+.caret::before {
+    content: "\25B6";
+    color: black;
+    display: inline-block;
+    margin-right: 6px;
+}
+
+/* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+.caret-down::before {
+    transform: rotate(90deg);
+}
+
+/* Hide the nested list */
+.nested {
+    display: none;
+}
+
+/* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+.active {
+    display: block;
+    margin-left: 10px;
+}
