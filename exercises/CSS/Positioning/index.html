@@ -2,30 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="../../../../favicon.ico">
+    <link rel="icon" href="../../../favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>IFC.js</title>
 </head>
 <body>
-<div class="file-opener">
-    <a class="invisible" id="save-button">Save JSON</a>
-    <button class="basic-button" id="file-opener-button">Open IFC</button>
-</div>
-<div class="header">
-    <h1 class="header-text">IFC.js Crash Course</h1>
-    
-    <a href="https://ifcjs.github.io/info/" target="_blank">
-        <img src="logo.svg" class="header-img" alt="">
-    </a>
-</div>
-<input class="invisible" id="file-input" type="file">
-<div class="general-container">
-    <div class="container" id="left-container"></div>
-    <div class="separator"></div>
-    <div class="container" id="right-container"><pre id="json"></pre></div>
-</div>
-<script src="bundle.js"></script>
+    <a class="docs-link" href="https://ifcjs.github.io/info/">Docs</a>
+    <button onclick="document.getElementById('file-input').click()">Open file</button>
+    <input type="file" id="file-input">
+    <canvas id="three-canvas"></canvas>
+    <script src="bundle.js"></script>
 </body>
 </html>

@@ -5,78 +5,41 @@
 }
 
 html, body {
-    overflow-y: scroll;
-    background-color: #F3F4F6;
-    
+    overflow: hidden;
 }
-.header{
-    display: flex;
+
+canvas {
     position: fixed;
-    background-color: white;
-    border: solid 1px black;
-    margin-left: 5px;
-    padding: 5px;
-    
-    
-}
-
-.general-container {
-    background-color: white;
+    top: 0;
     left: 0;
-    right: 0;
-    margin-top: 3rem;
-    bottom: 0;
-
-    display: flex;
-    height: fit-content;
-    min-height: 40rem;
+    outline: none;
 }
 
-.container {
-    margin: 1rem;
-    padding: 1rem;
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 0;
-    width:50px;
-    word-wrap: break-word;
-   
-}
-
-.separator {
-    border: 2px solid #F3F4F6;
-}
-
-.file-opener {
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    top: 4rem;
-    right: 4rem;
-}
-
-.invisible {
+input {
     visibility: collapse;
 }
 
-.basic-button{
-    background-color: #F3F4F6;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    border: none;
-    box-shadow: 0 0 0 0 #e6e6e6;
-    margin: 1rem;
+button {
+    z-index: 1;
+    position: absolute;
+    margin: 0.5rem;
+    padding: 0.3rem;
+    background-color: white;
+    border: 1px solid gray;
 }
 
-.basic-button:hover{
+button:hover {
     background-color: black;
     color: white;
 }
 
-
-.header-img{
-    width: 30px;
-    height: 40px;
+.docs-link {
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    margin: 0.5rem;
+    padding: 0.3rem;
+    text-decoration: none;
+    color: black;
+    border: 1px solid gray;
 }
