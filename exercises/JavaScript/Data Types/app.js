@@ -52,31 +52,30 @@ let objectData ={
     "mats": []
 }
 
-function createPset(...arg){
+function createPset(objectData){
     let newPset = {}
     newPset.expressID = 254
     newPset.type = objectData.psets[0].type
-    newPset.GlobalId = {
-        'type' : 1, "value" : "3LVpPLOTD8Y8ACz1_IFCJS"
+    newPset.GlobalId ={
+        'type' : 1,
+        'value' : "3LVpPLOTD8Y8ACz1_IFCJS"
     }
     newPset.OwnerHistory = {}
     newPset.Name = {
-        'type' : 1,
-        'value' : 'PSet_CrashCourse'
+        'value' : 1,
+        'value' : 'Pset_Ifcjs'
     }
     newPset.Description = null
-    newPset.HasProperties = [
-        'PropertySingleValue',
-        'PropertySingleValue'
-    ]
-    
-    return  newPset
+    newPset.HasProperties = []
+
+    return newPset
 }
 
-newPset = createPset(objectData)
-objectData.psets = [...objectData.psets,...[newPset]]
+let newPset = createPset(objectData)
+objectData.psets = [...objectData.psets[0], ...[newPset]]
 console.log(objectData)
 newPset.Name.value = 'Pset_Edit'
 console.log(objectData)
+
 
 
