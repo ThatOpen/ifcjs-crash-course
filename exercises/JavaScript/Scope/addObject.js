@@ -1,8 +1,9 @@
-export function adding (name, ifcClass,objects){
+export function adding (name,ifcClass,objects){
     let newElement = {
         'name' : name,
-        'ifcClass': ifcClass,
+        'IfcClass' : ifcClass
     }
+    
     objects.push(newElement)
-    return objects
+    return objects, newElement
 }
