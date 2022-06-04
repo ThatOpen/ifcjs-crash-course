@@ -1,15 +1,8 @@
-let pillarHeight = 3.5 //m
-let pillarAreaBase = 0.5*0.5 //m2
+const columnHeight = 3.5; //m
+const columnAreaBase = 0.5 * 0.5; //m2
+const volume = columnHeight * columnAreaBase; //m3
 
-let pillarVolume = pillarHeight * pillarAreaBase //m3
-const weightReinforcement = 1.5 //kg
+const unitWeight = 2400; // kg / m3
 
-let reinforcementRatio = (pillarVolume == 0) || weightReinforcement/pillarVolume
-console.log(reinforcementRatio)
-
-pillarHeight = 0 //m
-pillarVolume = pillarHeight * pillarAreaBase //m3
-
-
-reinforcementRatio = (pillarVolume == 0) || weightReinforcement/pillarVolume
-console.log(reinforcementRatio)
+const result = volume * unitWeight;
+console.log(result);
