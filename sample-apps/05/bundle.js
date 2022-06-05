@@ -79037,5 +79037,5 @@ window.addEventListener("resize", () => {
 
 //Sets up the IFC loading
 const ifcLoader = new IFCLoader();
-ifcLoader.ifcManager.setWasmPath("../../");
+ifcLoader.ifcManager.setWasmPath("../");
 ifcLoader.load("../../IFC/05.ifc", (ifcModel) => scene.add(ifcModel));
