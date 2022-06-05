@@ -1,0 +1,194 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+
+  --light-gray: rgb(123, 123, 123);
+  --light-blue: #8dbafff0;
+  --translucent-white: rgba(255, 255, 255, 0.7);
+
+  --normal-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  --blur-filter: blur(8px);
+}
+
+header {
+  color: var(--light-gray);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid gray;
+}
+
+header *:last-child {
+  margin-left: auto;
+  color: var(--light-blue);
+}
+
+h2 {
+    font-size: 1rem;
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+
+p {
+    font-size: 12px;
+}
+
+a {
+    text-decoration: none;
+}
+
+iframe {
+    width: 100%;
+    height: 100vh;
+}
+
+.hide-overflow {
+    overflow: hidden;
+}
+
+.bottom {
+    bottom: 1rem;
+}
+
+.spinning {
+    animation: logo-spin 8s infinite 0s cubic-bezier(0.38, 0.01, 0, 0.99);
+  }
+  
+  @keyframes logo-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(90deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    75% {
+      transform: rotate(270deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
+.logo {
+  width: 2rem;
+  height: 2rem;
+  margin: 0 1rem;
+  transition: all 0.3s ease 0s;
+}
+
+.project-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: row;
+}
+
+.toolbar a {
+  margin: 0.5rem;
+}
+
+/* From uiverse.io by @fanishah */
+.card {
+    margin: 1rem;
+    min-width: 10rem;
+    max-width: 20rem;
+    height: 15rem;
+    background-color: #ffffff;
+    border-radius: 1rem;
+    transition: all 0.15s ease-in;
+    box-shadow: var(--normal-shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card * {
+    margin: 0.5rem 0;
+  }
+
+  .card svg {
+    fill: var(--light-gray);
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .card .button {
+    padding: 1rem;
+  }
+  
+  .card:hover {
+    transform: translateY(-1.5rem);
+    border: var(--light-blue) 0.1em solid;
+    border-radius: 2.5rem 0 2.5rem 0;
+    cursor: pointer;
+  }
+
+  .card:hover svg,.card:hover h2  {
+    fill: var(--light-blue);
+    color: var(--light-blue);
+  }
+
+  /* From uiverse.io */
+.button {
+    padding: 0.7rem;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background: var(--translucent-white);
+    backdrop-filter: var(--blur-filter);
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+  }
+  
+  .button:hover {
+    background-color: var(--light-blue);
+    box-shadow: 0px 15px 20px rgba(46, 104, 229, 0.4);
+    color: #fff;
+    fill: #fff;
+    transform: translateY(-7px);
+  }
+  
+  .button:active {
+    transform: translateY(-1px);
+  }
+
+  .simple-card-container {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        width: 100%;
+  }
+
+  /* From uiverse.io by @adamgiebl */
+.simple-card {
+    margin: 1rem;
+    z-index: 1;
+    width: 190px;
+    padding: 1rem;
+    border-radius: 1rem;
+    background: var(--translucent-white);
+    box-shadow: var(--normal-shadow);
+    backdrop-filter: var(--blur-filter);
+   }
