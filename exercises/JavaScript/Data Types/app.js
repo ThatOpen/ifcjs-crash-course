@@ -72,7 +72,7 @@ function createPset(objectData){
 }
 
 let newPset = createPset(objectData)
-objectData.psets = [...objectData.psets[0], ...[newPset]]
+objectData.psets = [...objectData.psets, ...newPset]
 console.log(objectData)
 newPset.Name.value = 'Pset_Edit'
 console.log(objectData)
