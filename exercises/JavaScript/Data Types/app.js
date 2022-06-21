@@ -62,7 +62,7 @@ function createPset(objectData){
     }
     newPset.OwnerHistory = {}
     newPset.Name = {
-        'value' : 1,
+        'type' : 1,
         'value' : 'Pset_Ifcjs'
     }
     newPset.Description = null
