@@ -7,7 +7,6 @@ import {
   WebGLRenderer,
   Vector2,
 } from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 const canvas = document.getElementById("three-canvas");
 
@@ -41,14 +40,27 @@ window.addEventListener("resize", () => {
   renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
 });
 
-// Controls
-const controls = new OrbitControls(camera, canvas);
-controls.enableDamping = true;
-
 function animate() {
-  controls.update();
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
 }
 
 animate();
+
+window.addEventListener("mousemove", (event) => {
+  const position = getMousePosition(event);
+  camera.position.x = Math.sin(position.x * Math.PI * 2) * 2;
+  camera.position.z = Math.cos(position.x * Math.PI * 2) * 2;
+  camera.position.y = position.y * 3;
+  camera.lookAt(cubeMesh.position);
+});
+
+// The values will vary from -1 to +1
+function getMousePosition(event) {
+  const position = new Vector2();
+  const bounds = canvas.getBoundingClientRect();
+  position.x =((event.clientX - bounds.left) / (bounds.right - bounds.left)) * 2 - 1;
+  position.y = -((event.clientY - bounds.top) / (bounds.bottom - bounds.top)) * 2 + 1;
+
+  return position;
+}
