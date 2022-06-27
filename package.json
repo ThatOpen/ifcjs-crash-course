@@ -19,7 +19,9 @@
   "homepage": "https://github.com/ifcjs/ifcjs-crash-course#readme",
   "dependencies": {
     "camera-controls": "^1.34.5",
-    "three": "^0.135.0",
+    "dat.gui": "^0.7.9",
+    "gsap": "^3.10.4",
+    "three": "^0.141.0",
     "web-ifc": "^0.0.33",
     "web-ifc-viewer": "^1.0.172"
   },

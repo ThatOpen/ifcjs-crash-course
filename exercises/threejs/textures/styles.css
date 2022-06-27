@@ -1,0 +1,38 @@
+* {
+	margin: 0;
+	padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+#three-canvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    outline: none;
+}
+
+#loading {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items:center;
+}
+
+#loading .progress {
+	margin: 1.5em;
+	border: 1px solid white;
+	width: 50vw;
+}
+
+#loading .progressbar {
+	margin: 2px;
+	background: white;
+	height: 1em;
+	transform-origin: top left;
+	transform: scaleX(0);
+}
