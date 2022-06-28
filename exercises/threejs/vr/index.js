@@ -21,7 +21,7 @@ import {
   Clock
 } from "three";
 
-import CameraControls from 'camera-controls';
+import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
@@ -62,6 +62,7 @@ const renderer = new WebGLRenderer({
 });
 
 renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+renderer.xr.enabled = true;
 
 window.addEventListener("resize", () => {
   camera.aspect = canvas.clientWidth / canvas.clientHeight;
@@ -76,22 +77,17 @@ light.position.set(1, 1, 0.5);
 const baseLight = new AmbientLight(0xffffff, 1);
 scene.add(light, baseLight);
 
-// Controls
+// VR
 
-CameraControls.install( { THREE: subsetOfTHREE } ); 
-const clock = new Clock();
-const cameraControls = new CameraControls(camera, canvas);
+document.body.appendChild( VRButton.createButton( renderer ) );
 
-cameraControls.setLookAt(15, 15, 15, 0, 10, 0);
+// Animation
 
-function animate() {
-  const delta = clock.getDelta();
-	cameraControls.update( delta );
+renderer.setAnimationLoop( function () {
+
 	renderer.render( scene, camera );
-  requestAnimationFrame(animate);
-}
 
-animate();
+} );
 
 // Load 3D scan
 
@@ -108,6 +104,7 @@ loader.load(
 
     loadingElem.style.display = 'none';
 		scene.add( gltf.scene );
+    gltf.scene.position.set(-20, -20, -20);
 
 	},
 	// called while loading is progressing
