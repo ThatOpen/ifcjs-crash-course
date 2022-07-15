@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+html, body {
+    overflow: hidden;
+}
+
+#button-container {
+    z-index: 2;
+    position: absolute;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+
+#button-container * {
+    margin: 0.5rem;
+    padding: 8px;
+}
+
+#viewer-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+    width: 100%;
+    height: 100%;
+}

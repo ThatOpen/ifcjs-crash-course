@@ -20,10 +20,11 @@
   "dependencies": {
     "camera-controls": "^1.34.5",
     "dat.gui": "^0.7.9",
+    "dxf-writer": "^1.17.1",
     "gsap": "^3.10.4",
-    "three": "^0.141.0",
-    "web-ifc": "^0.0.33",
-    "web-ifc-viewer": "^1.0.172"
+    "three": "^0.135.0",
+    "web-ifc": "^0.0.35",
+    "web-ifc-viewer": "^1.0.207"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.1.0",
