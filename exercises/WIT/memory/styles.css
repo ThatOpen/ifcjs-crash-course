@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow: hidden;
+}
+
+#three-canvas{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+}
+
+#button-container {
+    display: flex;
+    flex-direction: column;
+    margin: 4rem 1rem;
+}
+
+#file-input{
+    z-index: 1;
+}
+
+#memory-button {
+    width: 8rem;
+    margin-top: 1rem;
+    z-index: 1;
+}

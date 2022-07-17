@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../../../favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>IFC.js</title>
+</head>
+<body>
+    <div id="viewer-container"></div>
+
+    <div class="ifc-tree-menu">
+        <ul id="myUL">
+            <li id="tree-root">
+                <span class="caret">Beverages</span>
+                <ul class="nested">
+                    <li>Water</li>
+                    <li>Coffee</li>
+                    <li>
+                        <span class="caret">Tea</span>
+                        <ul class="nested">
+                            <li>Black Tea</li>
+                            <li>White Tea</li>
+                            <li><span class="caret">Green Tea</span>
+                                <ul class="nested">
+                                    <li>Sencha</li>
+                                    <li>Gyokuro</li>
+                                    <li>Matcha</li>
+                                    <li>Pi Lo Chun</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <script src="bundle.js"></script>
+</body>
+</html>

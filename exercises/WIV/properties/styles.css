@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow: hidden;
+}
+
+.ifc-property-menu {
+    border: 1px solid gray;
+    width: 20rem;
+    position: absolute;
+    background-color: white;
+}
+
+.ifc-property-item {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 0.5rem;
+    border-bottom: solid 1px gray;
+}
+
+.ifc-property-value {
+    width: 100%;
+    text-align: right;
+}
+
+#viewer-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+    width: 100%;
+    height: 100%;
+}

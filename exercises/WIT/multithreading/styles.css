@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow: hidden;
+}
+
+#three-canvas{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+}
+
+#gui-container {
+    position: absolute;
+    z-index: 1;
+}
+
+#text-container {
+    margin: 1rem;
+    display: flex;
+}
