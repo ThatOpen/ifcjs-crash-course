@@ -144,6 +144,3 @@ async function drawProjectedItems(storey, plan, modelID) {
 	link.click();
 	link.remove();
 }
-
-
-

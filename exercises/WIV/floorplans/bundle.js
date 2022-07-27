@@ -123210,8 +123210,7 @@ init();
 
 async function init() {
 	await viewer.IFC.setWasmPath('../../../');
-	const model = await viewer.IFC.loadIfcUrl('../../../IFC/01.ifc');
-
+	const model = await viewer.IFC.loadIfcUrl('../../../IFC/05.ifc');
 	// Setup camera controls
 	const controls = viewer.context.ifcCamera.cameraControls;
 	controls.setPosition(7.6, 4.3, 24.8, false);
