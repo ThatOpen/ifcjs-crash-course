@@ -1,11 +1,13 @@
 import { Matrix4, Vector3,
   PerspectiveCamera,
+  DirectionalLight,
+  AmbientLight,
   Scene, WebGLRenderer,
 } from "three";
 
-//mapboxgl.accessToken = 'YOUR_API_KEY'
-//this API key is restricted to this github repo. Make a free account to get your own: https://account.mapbox.com/auth/signup/
-mapboxgl.accessToken = 'pk.eyJ1IjoiYWd2aWVnYXMiLCJhIjoiY2wyZjE4emwwMDYzbTNlb2dyODFyZHd2ciJ9.4939d5SFkJYnw9BpMxlPnA';
+import { IFCLoader } from "web-ifc-three";
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiYWd2aWVnYXMiLCJhIjoiY2w1cGp2OHB3MDhhdjNsbnFqM3BkZ3poOCJ9.LytCsKX0_KUW9cy9g4oZjA';
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/light-v10',
@@ -47,20 +49,20 @@ const customLayer = {
   renderingMode: '3d',
 
   onAdd: function () {
-    // const ifcLoader = new IFCLoader();
-    // ifcLoader.ifcManager.setWasmPath( '../../../' );
-    // ifcLoader.load( '../../../IFC/01.ifc', function ( model ) {
-    //   scene.add( model );
-    // });
+    const ifcLoader = new IFCLoader();
+    ifcLoader.ifcManager.setWasmPath( '../../../' );
+    ifcLoader.load( '../../../IFC/01.ifc', function ( model ) {
+      scene.add( model );
+    });
 
-    // const directionalLight = new DirectionalLight(0x404040);
-    // const directionalLight2 = new DirectionalLight(0x404040);
-    // const ambientLight = new AmbientLight( 0x404040, 3 );
-    //
-    // directionalLight.position.set(0, -70, 100).normalize();
-    // directionalLight2.position.set(0, 70, 100).normalize();
-    //
-    // scene.add(directionalLight, directionalLight2, ambientLight);
+    const directionalLight = new DirectionalLight(0x404040);
+    const directionalLight2 = new DirectionalLight(0x404040);
+    const ambientLight = new AmbientLight( 0x404040, 3 );
+
+    directionalLight.position.set(0, -70, 100).normalize();
+    directionalLight2.position.set(0, 70, 100).normalize();
+
+    scene.add(directionalLight, directionalLight2, ambientLight);
 },
 
   render: function (gl, matrix) {
@@ -99,51 +101,51 @@ map.on('style.load', () => {
   map.addLayer(customLayer, 'waterway-label');
 });
 
-// map.on('load', () => {
-// // Insert the layer beneath any symbol layer.
-//   const layers = map.getStyle().layers;
-//   const labelLayerId = layers.find(
-//       (layer) => layer.type === 'symbol' && layer.layout['text-field']
-//   ).id;
-//
-// // The 'building' layer in the Mapbox Streets
-// // vector tileset contains building height data
-// // from OpenStreetMap.
-//   map.addLayer(
-//       {
-//         'id': 'add-3d-buildings',
-//         'source': 'composite',
-//         'source-layer': 'building',
-//         'filter': ['==', 'extrude', 'true'],
-//         'type': 'fill-extrusion',
-//         'minzoom': 15,
-//         'paint': {
-//           'fill-extrusion-color': '#aaa',
-//
-// // Use an 'interpolate' expression to
-// // add a smooth transition effect to
-// // the buildings as the user zooms in.
-//           'fill-extrusion-height': [
-//             'interpolate',
-//             ['linear'],
-//             ['zoom'],
-//             15,
-//             0,
-//             15.05,
-//             ['get', 'height']
-//           ],
-//           'fill-extrusion-base': [
-//             'interpolate',
-//             ['linear'],
-//             ['zoom'],
-//             15,
-//             0,
-//             15.05,
-//             ['get', 'min_height']
-//           ],
-//           'fill-extrusion-opacity': 0.6
-//         }
-//       },
-//       labelLayerId
-//   );
-// });
+map.on('load', () => {
+// Insert the layer beneath any symbol layer.
+  const layers = map.getStyle().layers;
+  const labelLayerId = layers.find(
+      (layer) => layer.type === 'symbol' && layer.layout['text-field']
+  ).id;
+
+// The 'building' layer in the Mapbox Streets
+// vector tileset contains building height data
+// from OpenStreetMap.
+  map.addLayer(
+      {
+        'id': 'add-3d-buildings',
+        'source': 'composite',
+        'source-layer': 'building',
+        'filter': ['==', 'extrude', 'true'],
+        'type': 'fill-extrusion',
+        'minzoom': 15,
+        'paint': {
+          'fill-extrusion-color': '#aaa',
+
+          // Use an 'interpolate' expression to
+          // add a smooth transition effect to
+          // the buildings as the user zooms in.
+          'fill-extrusion-height': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            15,
+            0,
+            15.05,
+            ['get', 'height']
+          ],
+          'fill-extrusion-base': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            15,
+            0,
+            15.05,
+            ['get', 'min_height']
+          ],
+          'fill-extrusion-opacity': 0.6
+        }
+      },
+      labelLayerId
+  );
+});
